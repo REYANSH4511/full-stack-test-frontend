@@ -35,7 +35,7 @@ const ContactDeatils = ({ formData, setFormData }) => {
             navigate("/address-details");
           })
           .catch((error) => {
-            alert(error?.message);
+            alert(error?.response?.data?.message);
           });
       } catch (error) {
         console.error("Error submitting form:", error);

@@ -53,7 +53,7 @@ const AddressDeatils = () => {
             alert(res?.message);
           })
           .catch((error) => {
-            alert(error?.message);
+            alert(error?.response?.data?.message);
           });
       } catch (error) {
         console.error("Error submitting form:", error);
