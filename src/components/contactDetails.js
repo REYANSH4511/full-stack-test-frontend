@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { allApi } from "../api";
 const ContactDeatils = ({ formData, setFormData }) => {
@@ -8,18 +8,15 @@ const ContactDeatils = ({ formData, setFormData }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
-   if (name === "phoneNumber") {
-      if (!/^[0-9]{11}$/.test(value) || value === "") {
-        setFormData({
-          ...formData,
-          [name]: value,
-        });
+    if (name === "phoneNumber") {
+      if (/^[0-9]{11}$/.test(value)) {
+        return;
       }
     }
     setFormData({
-            ...formData,
-            [name]: value,
-          });
+      ...formData,
+      [name]: value,
+    });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,12 +30,12 @@ const ContactDeatils = ({ formData, setFormData }) => {
           .savePersonalDetails(formData)
           .then((res) => {
             alert(res?.message);
-            localStorage.setItem("name",res?.data?.firstName);
-            localStorage.setItem("userDetailsId",res?.data?._id);
-            navigate('/address-details');
+            localStorage.setItem("name", res?.data?.firstName);
+            localStorage.setItem("userDetailsId", res?.data?._id);
+            navigate("/address-details");
           })
           .catch((error) => {
-            alert( error?.message);
+            alert(error?.message);
           });
       } catch (error) {
         console.error("Error submitting form:", error);
